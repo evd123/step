@@ -12,17 +12,49 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/**
- * Adds a random greeting to the page.
- */
-function addRandomGreeting() {
-  const greetings =
-      ['Hello world!', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
+function getComments() {
+  fetch('/data').then(response => response.json()).then((messages) => {
+    const historyEl = document.getElementById('history');
+    messages.forEach((message) => {
+      historyEl.appendChild(createMessageElement(message));
+    });
+  });
+}
 
-  // Pick a random greeting.
-  const greeting = greetings[Math.floor(Math.random() * greetings.length)];
+function createListElement(text) {
+  const liElement = document.createElement('li');
+  liElement.innerText = text;
+  return liElement;
+}
 
-  // Add it to the page.
-  const greetingContainer = document.getElementById('greeting-container');
-  greetingContainer.innerText = greeting;
+/** Creates an element that represents a task, including its delete button. */
+function createMessageElement(message) {
+  const messageElement = document.createElement('li');
+  messageElement.className = 'message';
+
+  const titleElement = document.createElement('span');
+  titleElement.innerText = message.comment;
+
+  const deleteButtonElement = document.createElement('button');
+  deleteButtonElement.innerText = 'Delete';
+  deleteButtonElement.addEventListener('click', () => {
+    deleteMessage(message);
+
+    // Remove the task from the DOM.
+    messageElement.remove();
+  });
+
+  messageElement.appendChild(titleElement);
+  messageElement.appendChild(deleteButtonElement);
+  return messageElement;
+}
+
+/** Tells the server to delete the task. */
+function deleteMessage(message) {
+  const params = new URLSearchParams();
+  params.append('id', message.id);
+  fetch('/delete-message', {
+    method: 'POST',
+    body: params
+  });
 }

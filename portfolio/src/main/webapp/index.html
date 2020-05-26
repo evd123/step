@@ -1,18 +1,173 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>My Portfolio</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
-  </head>
-  <body>
-    <div id="content">
-      <h1>My Portfolio</h1>
-      <p>This is my portfolio.</p>
-      <p>Click here to get a random message:</p>
-      <button onclick="addRandomGreeting()">Hello</button>
-      <div id="greeting-container"></div>
-    </div>
-  </body>
+   <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta charset="UTF-8">
+      <title>Emma's Portfolio</title>
+      <link rel="stylesheet" href="style.css">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source Sans Pro">
+      <script src="script.js"></script>
+   </head>
+
+   <body onload="getComments()">
+      <div class="header">
+         <h1>Emma Dunn</h1>
+      </div>
+
+      <div class="row">
+         <div class="rightcolumn">
+            <h3>Hobbies</h3>
+            <p>Traveling</p>
+            <p class="aligncenter">
+               <a href="images/travel.png"><img src="images/travel.png" width=230/></a>
+            </p>
+            <p>Skiing</p>
+            <p class="aligncenter">
+               <a href="images/skiing.png"><img src="images/skiing.png" width=230/></a>
+            </p>
+            <p class="aligncenter">
+            <p>Reading</p>
+            <p class="aligncenter">
+               <a href="images/books.png"><img src="images/books.png" width=230/></a>
+            </p>
+            <p>Playing with my dogs</p>
+            <p class="aligncenter">
+               <a href="images/dog.jpg"><img src="images/dog.jpg" width=230/></a>
+            </p>
+            <p>Drinking coffee</p>
+            <p class="aligncenter">
+               <a href="images/coffee.png"><img src="images/coffee.png" width=230/></a>
+            </p>
+         </div>
+
+         <div class="middlecolumn">
+            <h2>Experience</h2>
+            <div class="card">
+               <h3>Google</h3>
+               <p>Student Training in Engineering Program Intern</p>
+               <u1>
+                  <li>Completed individual and group projects in which I gained more experience with HTML, CSS, JavaScript, and Google's APIs</li>
+               </u1>
+            </div>
+            <div class="card">
+               <h3>Pinterest</h3>
+               <p>Engage Scholar</p>
+               <u1>
+                  <li>Selective technical training program designed to help students connect with industry professionals and improve technical and interpersonal skills for future success in software engineering</li>
+               </u1>
+            </div>
+            <div class="card">
+               <h3>Capital One</h3>
+               <p>Summit for Developing Leaders Participant</p>
+               <u1>
+                  <li>Selective sophomore program hosted at Capital One's headquarters for prospective Business Analysts</li>
+                  <li>Participated in a team case competition and networked with Capital One associates</li>
+               </u1>
+            </div>
+            <div class="card">
+               <h3>BridgeYear</h3>
+               <p>Data Analysis Intern</p>
+               <u1>
+                  <li>Cleaned and analyzed data from surveys and student-mentor text messages with Python and R</li>
+                  <li>Designed and presented solutions and feedback on data trends</li>
+                  <li>Translated data and graphs into distributable formats and promotional materials</li>
+               </u1>
+            </div>
+            <h2>Extracurriculars</h2>
+            <div class="card">
+               <h3>HackRice</h3>
+               <p>Co-Director</p>
+               <u1>
+                  <li>Plan and direct HackRice X, the 10th anniversary of Rice University's annual hackathon that reaches over 400 students from around the world</li>
+                  <li>Organize and oversee the HackRice Board, a team of 12 undergraduate students</li>
+                  <li>Network with potential corporate partners and manage a $40,000+ budget</li>
+               </u1>
+            </div>
+            <div class="card">
+               <h3>Women in Analytics</h3>
+               <p>Student Ambassador</p>
+               <u1>
+                  <li>Inform potential student attendees of the exciting opportunities (scholarships, competitions, hackathons, speaker series, the conference itself) available to them</li>
+                  <li>Strategize funding for students attendees and logistics related to summer internships</li>
+                  <li>Provide input on enhancing the WIA student experience</li>
+               </u1>
+            </div>
+            <h2>Awards</h2>
+            <div class="card">
+               <h4>3rd Overall: UT Austin Women in Computer Science Hackathon</h4>
+               <u1>
+                  <li>Utilized JavaScript, React Native, Spotify's API, and CSS to develop a Mood-a-Day visual calendar that added a song based on the user's inputted mood to a designated playlist in their Spotify account</li>
+                  <li><a href="https://github.com/evd123/wicshack2020" target="_blank">View on Github</a></li>
+               </u1>
+            </div>
+            <div class="card">
+               <h4>Leadership Rice Mentorship Experience Fellow</h4>
+               <u1>
+                  <li>Selected for a competitive summer internship program designed to help undergraduates develop their leadership capacity through the mentorship of experienced professionals</li>
+               </u1>
+            </div>
+            <div class="card">
+               <h4>National Security Language Initiative for Youth Scholarship</h4>
+               <u1>
+                  <li>Awarded intensive-language study abroad scholarship by the U.S. State Department</li>
+                  <li>Lived with a host family and attended language (Mandarin Chinese) and culture courses in Nanjing, China for 6 weeks</li>
+                  <li>Improved from Novice High to Intermediate Mid on the ACTFL proficiency scale</li>
+               </u1>
+            </div>
+         </div>
+         
+         <div class="leftcolumn">
+            <h3>Hello!</h3>
+            <p class="aligncenter">
+               <a href="images/profile.png"><img src="images/profile.png" width=230/></a>
+            </p>
+            <p>I am a junior at Rice University, originally from New Albany, OH, studying Statistics and Computer Science. I am interested in exploring opportunities 
+               in data analytics, software engineering, project management, and business consulting. 
+            </p>
+            <h3>Skills</h3>
+            <p>&#128293&#128293&#128293&#128293 Python</p>
+            <p>&#128293&#128293&#128293&#128293&#128293 R</p>
+            <p>&#128293&#128293&#128293&#128293 Java</p>
+            <p>&#128293&#128293 HTML</p>
+            <p>&#128293&#128293 CSS</p>
+            <p>&#128293&#128293&#128293&#128293 Project Management</p>
+            <p>&#128293&#128293&#128293&#128293 Leadership</p>
+            <h3>Contact</h3>
+            <a href="mailto:evd1@rice.edu?subject=Subject">
+               <p style="text-align:center">
+                  <img src="images/envelope.png" width=100>
+               </p>
+            </a>
+            <a href="https://www.linkedin.com/in/emmavdunn" target="_blank">
+               <p style="text-align:center">
+                  <img src="images/linkedin.png" width=100>
+               </p>
+            </a>
+            <a href="https://hack.rice.edu" target="_blank">
+               <p style="text-align:center">
+                  <img src="images/HackRiceLogo_Black_White (1).jpg" width=100>
+               </p>
+            </a>
+            <a href="https://github.com/evd123" target="_blank">
+               <p style="text-align:center">
+                  <img src="images/github.png" width=100>
+               </p>
+            </a>
+            <h3>Leave a comment!</h3>
+            <ul id="history"></ul>
+            <form action="/data" method="POST">
+               <p>Comment:</p>
+               <textarea name="text-input" placeholder="Comment"></textarea>
+               <br/><br/>
+               <input type="checkbox" name="yes-response" value="true"> Check if you want a response (and make sure to fill in your email below)!
+               <p>Email:</p>
+               <input type="email" name="email-input" placeholder="me@example.com"></input>
+               <br/><br/>
+               <input type="submit" />
+            </form>
+         </div>
+      </div>
+      <div class="footer">
+      </div>
+   </body>
 </html>
