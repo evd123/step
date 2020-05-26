@@ -15,28 +15,57 @@ h1 {
   padding: 20px;
 }
 
+h2 {
+    text-align: center;
+}
+
+h3 {
+    padding-left: 5px;
+}
+
+h4 {
+    padding-left: 5px;
+}
+
 .column {
   float: left;
 }
 
 /* Left and right column */
-.column.side {
-  width: 25%;
+.column.left {
+  width: 22.5%;
+  align-content: left;
+  padding-top: 35px;
+  padding-right: 15px;
 }
+
+.column.right {
+  width: 22.5%;
+  align-content: right;
+  padding-top: 35px;
+  padding-left: 15px;
+}
+
 
 /* Middle column */
 .column.middle {
-  width: 50%;
+    align-content: center;
+    width: 45%;
+}
+
+.card {
+  background-color: black;
+  color:white;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+p {
+    padding-left: 10px;
 }
 
 p1 {
-    color: lightgray;
-    text-align: center;
-    width: 200px;
-    margin: auto;
-}
-
-div {
-    background: linear-gradient(to bottom, #242323 0%, #bebec5 100%);
+    padding-top: 0px;
+    padding-left: 15px;
 }
 
