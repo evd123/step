@@ -7,3 +7,36 @@
 #greeting-container {
   margin-top: 20px;
 }
+
+h1 {
+  background-color: rgb(0, 0, 0);
+  color:lightgray;
+  text-align: center;
+  padding: 20px;
+}
+
+.column {
+  float: left;
+}
+
+/* Left and right column */
+.column.side {
+  width: 25%;
+}
+
+/* Middle column */
+.column.middle {
+  width: 50%;
+}
+
+p1 {
+    color: lightgray;
+    text-align: center;
+    width: 200px;
+    margin: auto;
+}
+
+div {
+    background: linear-gradient(to bottom, #242323 0%, #bebec5 100%);
+}
+
