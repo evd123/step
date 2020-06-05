@@ -3,21 +3,21 @@
 }
 
 body {
+    background: white;
 	font-family: "Source Sans Pro";
 	padding: 10px;
-	background: white;
 }
 
 .header {
+    background: #b8bc86;
 	padding: 30px;
 	text-align: center;
-	background: #b8bc86;
 }
 
 h1 {
 	color: whitesmoke;
+    padding: 20px;
 	text-align: center;
-	padding: 20px;
 }
 
 h2 {
@@ -29,32 +29,32 @@ h2 {
 
 .leftcolumn {
 	float: left;
-	width: 25%;
 	padding: 10px;
 	padding-top: 40px;
+    width: 25%;
 }
 
 .rightcolumn {
 	float: left;
-	width: 25%;
 	padding: 10px;
 	padding-top: 40px;
+    width: 25%;
 }
 
 
 /* Middle column */
 
 .middlecolumn {
+    align-content: center;
 	float: left;
-	align-content: center;
 	width: 50%;
 }
 
 .card {
 	background-color: #b8bc86;
 	color: whitesmoke;
+    margin-top: 15px;
 	padding: 20px;
-	margin-top: 15px;
 }
 
 p {
@@ -69,16 +69,16 @@ a {
 /* Clear floats after the columns */
 
 .row:after {
+    clear: both;
 	content: "";
 	display: table;
-	clear: both;
 }
 
 .footer {
+    background: #b8bc86;
+	margin-top: 20px;
 	padding: 20px;
 	text-align: center;
-	background: #b8bc86;
-	margin-top: 20px;
 }
 
 @media screen and (max-width: 750px) {

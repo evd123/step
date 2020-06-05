@@ -63,9 +63,9 @@ public final class DataServlet extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         // Get the input from the form.
-        String msg = request.getParameter("text-input");
+        String msg = request.getParameter('text-input');
         String yes = getYes(request);
-        String email = request.getParameter("email-input");
+        String email = request.getParameter('email-input');
         // Record time submitted.
         long timestamp = System.currentTimeMillis();
 
@@ -96,12 +96,13 @@ public final class DataServlet extends HttpServlet {
     Function to check if email is submitted if the user wants a response. Don't think this function actually does anything.
     */
     private String getYes(HttpServletRequest request) {
-        String yes = request.getParameter("yes-response");
-        String emailString = request.getParameter("email-input");
+        String yes = request.getParameter('yes-response');
+        String emailString = request.getParameter('email-input');
         if (emailString == null) {
             System.err.println("It looks like you're interested in a response! Please enter your email address so that I can get in touch.");
             return "false";
         }
+        
         return yes;
     }
 }
