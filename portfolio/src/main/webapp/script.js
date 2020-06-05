@@ -12,29 +12,49 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/**
- * Adds a random greeting to the page.
- */
-function addRandomGreeting() {
-  const greetings =
-      ['Hello world!', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
-
-  // Pick a random greeting.
-  const greeting = greetings[Math.floor(Math.random() * greetings.length)];
-
-  // Add it to the page.
-  const greetingContainer = document.getElementById('greeting-container');
-  greetingContainer.innerText = greeting;
+function getComments() {
+	fetch('/data').then(response => response.json()).then((messages) => {
+		const historyEl = document.getElementById('history');
+		messages.forEach((message) => {
+			historyEl.appendChild(createMessageElement(message));
+		});
+	});
 }
 
-function funFact() {
-  const facts =
-      ["I'm from Columbus, OH", "I have two dogs, Oscar and Sunny", "I like to travel, drink coffee, and get outside", "My favorite shows are Friends, Gilmore Girls, and Bargain Mansions"];
+function createListElement(text) {
+	const liElement = document.createElement('li');
+	liElement.innerText = text;
+	return liElement;
+}
 
-  // Pick a random greeting.
-  const fact = facts[Math.floor(Math.random() * facts.length)];
+/** Creates an element that represents a task, including its delete button. */
+function createMessageElement(message) {
+	const messageElement = document.createElement('li');
+	messageElement.className = 'message';
 
-  // Add it to the page.
-  const factContainer = document.getElementById('fact-container');
-  factContainer.innerText = fact;
+	const titleElement = document.createElement('span');
+	titleElement.innerText = message.comment;
+
+	const deleteButtonElement = document.createElement('button');
+	deleteButtonElement.innerText = 'Delete';
+	deleteButtonElement.addEventListener('click', () => {
+		deleteMessage(message);
+
+		// Remove the task from the DOM.
+		messageElement.remove();
+	});
+
+	messageElement.appendChild(titleElement);
+	messageElement.appendChild(deleteButtonElement);
+	return messageElement;
+}
+
+/** Tells the server to delete the task. */
+function deleteMessage(message) {
+	const params = new URLSearchParams();
+	params.append('id', message.id);
+	fetch('/delete-message', {
+		method: 'POST',
+		body: params
+	});
 }

@@ -1,82 +1,91 @@
 * {
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 body {
-  font-family: "Source Sans Pro";
-  padding: 10px;
-  background: white;
+	font-family: "Source Sans Pro";
+	padding: 10px;
+	background: white;
 }
 
 .header {
-  padding: 30px;
-  text-align: center;
-  background: #b8bc86;
+	padding: 30px;
+	text-align: center;
+	background: #b8bc86;
 }
 
 h1 {
-  color:whitesmoke;
-  text-align: center;
-  padding: 20px;
+	color: whitesmoke;
+	text-align: center;
+	padding: 20px;
 }
 
 h2 {
-    text-align: center;
+	text-align: center;
 }
 
-.column {
-  float: left;
-  padding: 10px;
-}
 
 /* Left and right column */
-.column.left {
-  width: 25%;
-  padding: 10px;
-  padding-top: 40px;
+
+.leftcolumn {
+	float: left;
+	width: 25%;
+	padding: 10px;
+	padding-top: 40px;
 }
 
-.column.right {
-  width: 25%;
-  padding: 10px;
-  padding-top: 40px;
+.rightcolumn {
+	float: left;
+	width: 25%;
+	padding: 10px;
+	padding-top: 40px;
 }
 
 
 /* Middle column */
-.column.middle {
-    align-content: center;
-    width: 50%;
+
+.middlecolumn {
+	float: left;
+	align-content: center;
+	width: 50%;
 }
 
 .card {
-  background-color: #b8bc86;
-  color:whitesmoke;
-  padding: 20px;
-  margin-top: 15px;
+	background-color: #b8bc86;
+	color: whitesmoke;
+	padding: 20px;
+	margin-top: 15px;
 }
 
 p {
-    padding-left: 10px;
+	padding-left: 10px;
 }
 
-p1 {
-    padding-left: 15px;
-    padding-bottom: 10px;
+a {
+	padding: 15px;
 }
+
 
 /* Clear floats after the columns */
+
 .row:after {
-  content: "";
-  display: table;
-  clear: both;
+	content: "";
+	display: table;
+	clear: both;
 }
 
 .footer {
-  padding: 20px;
-  text-align: center;
-  background: #b8bc86;
-  margin-top: 20px;
+	padding: 20px;
+	text-align: center;
+	background: #b8bc86;
+	margin-top: 20px;
 }
 
-
+@media screen and (max-width: 750px) {
+	.leftcolumn,
+	.middlecolumn,
+	.rightcolumn {
+		width: 90%;
+		padding: 20;
+	}
+}
