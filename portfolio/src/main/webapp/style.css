@@ -24,8 +24,14 @@ body {
 	text-align: center;
 }
 
+h {
+    color: whitesmoke;
+    text-align: center;
+    font-size: 50px;
+}
+
 h1 {
-	color: whitesmoke;
+	color: #b8bc86;
     padding: 20px;
 	text-align: center;
 }
@@ -69,10 +75,6 @@ h2 {
 
 p {
 	padding-left: 10px;
-}
-
-a {
-	padding: 15px;
 }
 
 

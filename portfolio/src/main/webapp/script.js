@@ -104,7 +104,7 @@ function getMap() {
       '</div>'+
       '<h1 id="firstHeading" class="firstHeading">Empire Bowl</h1>'+
       '<div id="bodyContent">'+
-      '<p>I love getting outside and being active and skiing is the best adrenaline rush ' +
+      '<p>I love getting outside and being active and skiing is the best adrenaline rush</p> ' +
       '<p class="aligncenter">' +
         '<a href="images/skiing.png"><img src="images/skiing.png" width=230/></a>' +
       '</p>'+
@@ -131,7 +131,7 @@ function getMap() {
       '</div>'+
       '<h1 id="firstHeading" class="firstHeading">The Book Loft</h1>'+
       '<div id="bodyContent">'+
-      '<p>This is my favorite book store; it used to be a house, but now every room holds a different genre. ' +
+      '<p>This is my favorite book store; it used to be a house, but now every room holds a different genre.</p> ' +
       '<p class="aligncenter">' +
         '<a href="images/books.png"><img src="images/books.png" width=230/></a>' +
       '</p>'+
@@ -159,7 +159,7 @@ function getMap() {
       '<h1 id="firstHeading" class="firstHeading">Rice Coffeehouse</h1>'+
       '<div id="bodyContent">'+
       '<p>As my coffee addiction knows no end, "Chaus" is a favorite campus spot of mine. ' +
-      'Their oatmilk lattes are to-die-for. ' +
+      'Their oatmilk lattes are to-die-for.</p> ' +
       '<p class="aligncenter">' +
         '<a href="images/coffee.png"><img src="images/coffee.png" width=230/></a>' +
       '</p>'+
@@ -186,7 +186,7 @@ function getMap() {
       '</div>'+
       '<h1 id="firstHeading" class="firstHeading">New Albany, OH</h1>'+
       '<div id="bodyContent">'+
-      '<p>My hometown, featuring my dog, Oscar! ' +
+      '<p>My hometown, featuring my dog, Oscar!</p> ' +
       '<p class="aligncenter">' +
         '<a href="images/dog.jpg"><img src="images/dog.jpg" width=230/></a>' +
       '</p>'+
@@ -205,5 +205,215 @@ function getMap() {
     });
     homeMarker.addListener('click', function() {
       homeWindow.open(map, homeMarker);
+    });
+
+    // Google marker
+    var googleString = '<div id="content">'+
+      '<div id="siteNotice">'+
+      '</div>'+
+      '<h1 id="firstHeading" class="firstHeading">Google</h1>'+
+      '<div id="bodyContent">'+
+      "<p>This summer, I am interning with Google as a Student Training in Engineering Program intern on the Chronicle team! " +
+      "I completed group and individual projects (including this website) and gained more experience with " +
+      "HTML, CSS, JavaScript, Java, and Google's APIs.</p>"+
+      '</div>'+
+      '</div>';
+
+    var googleWindow = new google.maps.InfoWindow({
+      content: googleString
+    });
+
+    var googleMarker = new google.maps.Marker({
+      position: {lat: 40.798939, lng: -73.024742},
+      zoom: 9, 
+      map: map,
+      title: 'Google'
+    });
+    googleMarker.addListener('click', function() {
+      googleWindow.open(map, googleMarker);
+    });
+
+    // Pinterest marker
+    var pinString = '<div id="content">'+
+      '<div id="siteNotice">'+
+      '</div>'+
+      '<h1 id="firstHeading" class="firstHeading">Pinterest</h1>'+
+      '<div id="bodyContent">'+
+      "<p>I am an Engage Scholar with Pinterest this summer! The Engage Scholar Program is a " +
+      "technical training program designed to help students connect with industry professionals "+
+      "and improve technical and interpersonal skills for future success in software engineering</p>"+
+      '</div>'+
+      '</div>';
+
+    var pinWindow = new google.maps.InfoWindow({
+      content: pinString
+    });
+
+    var pinMarker = new google.maps.Marker({
+      position: {lat: 37.775246, lng: -122.399734},
+      zoom: 9, 
+      map: map,
+      title: 'Pinterest'
+    });
+    pinMarker.addListener('click', function() {
+      pinWindow.open(map, pinMarker);
+    });
+
+    // Capital One marker
+    var cap1String = '<div id="content">'+
+      '<div id="siteNotice">'+
+      '</div>'+
+      '<h1 id="firstHeading" class="firstHeading">Capital One</h1>'+
+      '<div id="bodyContent">'+
+      "<p>I participated in Capital One's Summit for Developing Leaders in 2019! " +
+      "This was a sophomore program hosted at Capital One's Texas headquarters for prospective "+
+      "Business Analysts.</p>"+
+      '</div>'+
+      '</div>';
+
+    var cap1Window = new google.maps.InfoWindow({
+      content: cap1String
+    });
+
+    var cap1Marker = new google.maps.Marker({
+      position: {lat: 33.082160, lng: -96.803208},
+      zoom: 9, 
+      map: map,
+      title: 'Cap1'
+    });
+    cap1Marker.addListener('click', function() {
+      cap1Window.open(map, cap1Marker);
+    });
+
+    // BridgeYear marker
+    var byString = '<div id="content">'+
+      '<div id="siteNotice">'+
+      '</div>'+
+      '<h1 id="firstHeading" class="firstHeading">BridgeYear</h1>'+
+      '<div id="bodyContent">'+
+      "<p>Last summer (2019), I interned with BridgeYear as a Data Analysis Intern. " +
+      "I cleaned and analyzed data from surveys and student-mentor text messages with Python and R, "+
+      "designed and presented solutions and feedback on data trends, "
+      "and translated data and graphs into distributable formats and promotional materials.</p>"+
+      '</div>'+
+      '</div>';
+
+    var byWindow = new google.maps.InfoWindow({
+      content: byString
+    });
+
+    var byMarker = new google.maps.Marker({
+      position: {lat: 29.717210, lng: -95.471665},
+      zoom: 9, 
+      map: map,
+      title: 'BY'
+    });
+    byMarker.addListener('click', function() {
+      byWindow.open(map, byMarker);
+    });
+
+    // HackRice marker
+    var hrString = '<div id="content">'+
+      '<div id="siteNotice">'+
+      '</div>'+
+      '<h1 id="firstHeading" class="firstHeading">HackRice</h1>'+
+      '<div id="bodyContent">'+
+      "<p>This year, I am co-directing HackRice X, the 10th anniversary of Rice University's annual "+
+      "hackathon that reaches over 400 students from around the world. I organize and oversee the " +
+      "HackRice Board, a team of 12 undergraduate students, network with potential corporate partners "+
+      "and manage a $40,000+ budget.</p>"+
+      '</div>'+
+      '</div>';
+
+    var hrWindow = new google.maps.InfoWindow({
+      content: hrString
+    });
+
+    var hrMarker = new google.maps.Marker({
+      position: {lat: 29.719023, lng: -95.397827},
+      zoom: 9, 
+      map: map,
+      title: 'HR'
+    });
+    hrMarker.addListener('click', function() {
+      hrWindow.open(map, hrMarker);
+    });
+
+    // WIA marker
+    var wiaString = '<div id="content">'+
+      '<div id="siteNotice">'+
+      '</div>'+
+      '<h1 id="firstHeading" class="firstHeading">Women in Analytics</h1>'+
+      '<div id="bodyContent">'+
+      "<p>This year, I am a student ambassador with the Women in Analytics conference. I help to inform "+
+      "potential student attendees of the exciting opportunities (scholarships, competitions, hackathons, "+
+      "speaker series, the conference itself) available to them, strategize funding for sutdent attendees "+
+      "and logistics related to summer internships, and provide input on enhancing the WIA student experience.</p>"+
+      '</div>'+
+      '</div>';
+
+    var wiaWindow = new google.maps.InfoWindow({
+      content: wiaString
+    });
+
+    var wiaMarker = new google.maps.Marker({
+      position: {lat: 39.0961960, lng: -83.003048},
+      zoom: 9, 
+      map: map,
+      title: 'WIA'
+    });
+    wiaMarker.addListener('click', function() {
+      wiaWindow.open(map, wiaMarker);
+    });
+
+    // WiCS marker
+    var wicsString = '<div id="content">'+
+      '<div id="siteNotice">'+
+      '</div>'+
+      '<h1 id="firstHeading" class="firstHeading">WiCS Hack</h1>'+
+      '<div id="bodyContent">'+
+      "<p>My team placed 3rd overall in the UT Austin Women in Computer Science Hackathon! "+
+      "We utilized JavaScript, React Native, Spotify's API, and CSS to develop a Mood-a-Day visual calendar "+
+      "that added a song based on the user's inputted mood to a designated playlist in their Spotify account.</p>"+
+      '</div>'+
+      '</div>';
+
+    var wicsWindow = new google.maps.InfoWindow({
+      content: wicsString
+    });
+
+    var wicsMarker = new google.maps.Marker({
+      position: {lat: 30.284381, lng: -97.734725},
+      zoom: 9, 
+      map: map,
+      title: 'WiCS'
+    });
+    wicsMarker.addListener('click', function() {
+      wicsWindow.open(map, wicsMarker);
+    });
+
+    // Rice marker
+    var riceString = '<div id="content">'+
+      '<div id="siteNotice">'+
+      '</div>'+
+      '<h1 id="firstHeading" class="firstHeading">Rice University</h1>'+
+      '<div id="bodyContent">'+
+      "<p>I am a junior at Rice University studying Computer Science and Statistics. "+
+      "I am interested in exploring opportunities in data analytics, software engineering, project management, and business consulting.</p>"+
+      '</div>'+
+      '</div>';
+
+    var riceWindow = new google.maps.InfoWindow({
+      content: riceString
+    });
+
+    var riceMarker = new google.maps.Marker({
+      position: {lat: 29.720126, lng: -95.398847},
+      zoom: 9, 
+      map: map,
+      title: 'Rice'
+    });
+    riceMarker.addListener('click', function() {
+      riceWindow.open(map, riceMarker);
     });
 }
