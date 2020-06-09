@@ -5,7 +5,7 @@
 #map {
     height: 100%;
 }
-      /* Optional: Makes the sample page fill the window. */
+
 html, body {
     height: 100%;
     margin: 0;
@@ -19,24 +19,32 @@ body {
 }
 
 .header {
-    background: #b8bc86;
+    background: #192841;
 	padding: 30px;
 	text-align: center;
 }
 
+a {
+    padding: 15px;
+}
+
 h {
+    align-content: center;
     color: whitesmoke;
+    font-size: 60px;
+    font-weight: bold;
     text-align: center;
-    font-size: 50px;
 }
 
 h1 {
-	color: #b8bc86;
+	align-content: center;
+    color: #192841;
     padding: 20px;
 	text-align: center;
 }
 
 h2 {
+    align-content: center;
 	text-align: center;
 }
 
@@ -45,9 +53,9 @@ p {
 }
 
 .footer {
-    background: #b8bc86;
+    background: #192841;
 	margin-top: 20px;
-	padding: 20px;
+    padding: 30px;
 	text-align: center;
 }
-}
+

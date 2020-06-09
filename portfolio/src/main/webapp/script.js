@@ -66,7 +66,7 @@ function deleteMessage(message) {
 function getMap() {
     const map = new google.maps.Map(
         document.getElementById('map'), 
-        {center: {lat: 39.8283, lng: -98.5795}, zoom: 5});
+        {center: {lat: 39.8283, lng: -99}, zoom: 6});
     
     // Travel/NSLI-Y marker
     var travelString = '<div id="content">'+
