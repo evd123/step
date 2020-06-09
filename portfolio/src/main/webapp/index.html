@@ -6,6 +6,7 @@
       <title>Emma's Portfolio</title>
       <link rel="stylesheet" href="style.css">
       <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source Sans Pro">
+      <script src="https://www.gstatic.com/charts/loader.js"></script>
       <script
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBcmH-zM_eWqi8tVB4CaVHNGERZvWeS6hU">
       </script>
@@ -15,30 +16,31 @@
 
    <body onload="initialize();">
       <div class="header">
-         <h>Emma Dunn</h>
+         <h>Emma</h>
+         <h3>Dunn</h3>
       </div>
 
       <div id="map"></div>
 
       <div style="text-align:center">
-        <h2>Contact</h2>
+        <h2>Connect</h2>
         <a href="mailto:evd1@rice.edu?subject=Subject"><img src="images/envelope.png" width=100></a>
         <a href="https://www.linkedin.com/in/emmavdunn" target="_blank"><img src="images/linkedin.png" width=100></a>
         <a href="https://hack.rice.edu" target="_blank"><img src="images/HackRiceLogo_Black_White (1).jpg" width=100></a>
         <a href="https://github.com/evd123" target="_blank"><img src="images/github.png" width=100></a>
-        <h2>Leave a comment!</h2>
+
+        <h2>Comment</h2>
           <ul id="history"></ul>
           <form action="/data" method="POST">
-           <p>Comment:</p>
-           <textarea name="text-input" placeholder="Comment"></textarea>
-           <br/><br/>
-           <input type="checkbox" name="yes-response" value="true"> Check if you want a response (and make sure to fill in your email below)!
-           <p>Email:</p>
-           <input type="email" name="email-input" placeholder="me@example.com"></input>
-           <br/><br/>
-           <input type="submit" />
+           <p>Message: &nbsp<textarea name="text-input" placeholder="Message"></textarea></p>
+           <p><input type="checkbox" name="yes-response" value="true"> Check if you want a response (and make sure to fill in your email below)!</p>
+           <p>Email: &nbsp<input type="email" name="email-input" placeholder="me@example.com"></input></p>
+           <input type="submit"/>
           </form>
         </div>
+
+        <h2>Graph</h2>
+        <div id="chart-container"></div>
       </div>
       <div class="footer">
       </div>

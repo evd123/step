@@ -16,6 +16,31 @@ function initialize() {
     getMap();
 }
 
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
+
+/** Creates a chart and adds it to the page. */
+function drawChart() {
+  const data = new google.visualization.DataTable();
+  data.addColumn('string', 'Animal');
+  data.addColumn('number', 'Count');
+        data.addRows([
+          ['Lions', 10],
+          ['Tigers', 5],
+          ['Bears', 15]
+        ]);
+
+  const options = {
+    'title': 'Zoo Animals',
+    'width':500,
+    'height':400
+  };
+
+  const chart = new google.visualization.PieChart(
+      document.getElementById('chart-container'));
+  chart.draw(data, options);
+}
+
 function getComments() {
 	fetch('/data').then(response => response.json()).then((messages) => {
 		const historyEl = document.getElementById('history');
@@ -66,7 +91,7 @@ function deleteMessage(message) {
 function getMap() {
     const map = new google.maps.Map(
         document.getElementById('map'), 
-        {center: {lat: 39.8283, lng: -99}, zoom: 6});
+        {center: {lat: 39.8283, lng: -99.5}, zoom: 5.8});
     
     // Travel/NSLI-Y marker
     var travelString = '<div id="content">'+
@@ -75,11 +100,11 @@ function getMap() {
       '<h1 id="firstHeading" class="firstHeading">Nanjing, China</h1>'+
       '<div id="bodyContent">'+
       '<p>I love to travel, and Nanjing, China has been a favorite of the places I have visited! ' +
-      'Through the <a href="https://www.nsliforyouth.org/" target = "_blank">National Security Language Initiative for Youth Scholarship</a>, '+
+      'Through the<a href="https://www.nsliforyouth.org/" target = "_blank">National Security Language Initiative for Youth Scholarship</a>, '+
       'I lived with a host family and attended language and culture classes at Nanjing University for 6 weeks. '+
       'A past capital of China, Nanjing has incredible historical sights and amazing food!</p>'+
-      '<p class="aligncenter">' +
-        '<a href="images/travel.png"><img src="images/travel.png" width=230/></a>' +
+      '<p>' +
+        '<a href="images/travel.png"><img src="images/travel.png" width=230 align="middle"/></a>' +
       '</p>'+
       '</div>'+
       '</div>';
@@ -104,9 +129,9 @@ function getMap() {
       '</div>'+
       '<h1 id="firstHeading" class="firstHeading">Empire Bowl</h1>'+
       '<div id="bodyContent">'+
-      '<p>I love getting outside and being active and skiing is the best adrenaline rush</p> ' +
-      '<p class="aligncenter">' +
-        '<a href="images/skiing.png"><img src="images/skiing.png" width=230/></a>' +
+      '<p>Winter is my favorite season because: skiing!</p> ' +
+      '<p>' +
+        '<a href="images/skiing.png"><img src="images/skiing.png" width=230 align="middle"/></a>' +
       '</p>'+
       '</div>'+
       '</div>';
@@ -133,7 +158,7 @@ function getMap() {
       '<div id="bodyContent">'+
       '<p>This is my favorite book store; it used to be a house, but now every room holds a different genre.</p> ' +
       '<p class="aligncenter">' +
-        '<a href="images/books.png"><img src="images/books.png" width=230/></a>' +
+        '<a href="images/books.png"><img src="images/books.png" width=230 align="middle"/></a>' +
       '</p>'+
       '</div>'+
       '</div>';
@@ -158,10 +183,9 @@ function getMap() {
       '</div>'+
       '<h1 id="firstHeading" class="firstHeading">Rice Coffeehouse</h1>'+
       '<div id="bodyContent">'+
-      '<p>As my coffee addiction knows no end, "Chaus" is a favorite campus spot of mine. ' +
-      'Their oatmilk lattes are to-die-for.</p> ' +
+      '<p>"Chaus" is one of my favorite spots on campus! ' +
       '<p class="aligncenter">' +
-        '<a href="images/coffee.png"><img src="images/coffee.png" width=230/></a>' +
+        '<a href="images/coffee.png"><img src="images/coffee.png" width=230 align="middle"/></a>' +
       '</p>'+
       '</div>'+
       '</div>';
@@ -187,8 +211,8 @@ function getMap() {
       '<h1 id="firstHeading" class="firstHeading">New Albany, OH</h1>'+
       '<div id="bodyContent">'+
       '<p>My hometown, featuring my dog, Oscar!</p> ' +
-      '<p class="aligncenter">' +
-        '<a href="images/dog.jpg"><img src="images/dog.jpg" width=230/></a>' +
+      '<p>' +
+        '<a href="images/dog.jpg"><img src="images/dog.jpg" width=230 align="middle"/></a>' +
       '</p>'+
       '</div>'+
       '</div>';
@@ -357,7 +381,7 @@ function getMap() {
     });
 
     var wiaMarker = new google.maps.Marker({
-      position: {lat: 39.0961960, lng: -83.003048},
+      position: {lat: 39.9612, lng: -82.9988},
       zoom: 9, 
       map: map,
       title: 'WIA'

@@ -39,17 +39,26 @@ h {
 h1 {
 	align-content: center;
     color: #192841;
-    padding: 20px;
+    font-size: 20px;
+    font-weight: bold;
 	text-align: center;
 }
 
 h2 {
     align-content: center;
+    color: #192841;
+    font-size: 30px;
 	text-align: center;
 }
 
+h3 {
+    color: whitesmoke;
+    font-size: 30px;
+}
+
 p {
-	padding-left: 10px;
+    color: #192841;
+    padding-left: 10px;
 }
 
 .footer {
@@ -59,3 +68,22 @@ p {
 	text-align: center;
 }
 
+input[type=submit] {
+  background-color: #192841;
+  border: none;
+  border-radius: 10px;
+  color: whitesmoke;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 10px 15px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+input[type=checkbox] {
+    color:#192841;
+}
+
+textarea {
+    vertical-align: middle;
+}
