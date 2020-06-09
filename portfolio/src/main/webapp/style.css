@@ -58,7 +58,7 @@ h3 {
 
 p {
     color: #192841;
-    padding-left: 10px;
+    padding: 10px;
 }
 
 .footer {
@@ -86,4 +86,8 @@ input[type=checkbox] {
 
 textarea {
     vertical-align: middle;
+}
+
+#chart-container {
+    align-content: center;
 }
