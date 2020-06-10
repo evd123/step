@@ -1,9 +1,91 @@
-#content {
-  margin-left: auto;
-  margin-right: auto;
-  width: 650px;
+* {
+	box-sizing: border-box;
 }
 
-#greeting-container {
-  margin-top: 20px;
+body {
+    background: white;
+	font-family: "Source Sans Pro";
+	padding: 10px;
+}
+
+.header {
+    background: #b8bc86;
+	padding: 30px;
+	text-align: center;
+}
+
+h1 {
+	color: whitesmoke;
+    padding: 20px;
+	text-align: center;
+}
+
+h2 {
+	text-align: center;
+}
+
+
+/* Left and right column */
+
+.leftcolumn {
+	float: left;
+	padding: 10px;
+	padding-top: 40px;
+    width: 25%;
+}
+
+.rightcolumn {
+	float: left;
+	padding: 10px;
+	padding-top: 40px;
+    width: 25%;
+}
+
+
+/* Middle column */
+
+.middlecolumn {
+    align-content: center;
+	float: left;
+	width: 50%;
+}
+
+.card {
+	background-color: #b8bc86;
+	color: whitesmoke;
+    margin-top: 15px;
+	padding: 20px;
+}
+
+p {
+	padding-left: 10px;
+}
+
+a {
+	padding: 15px;
+}
+
+
+/* Clear floats after the columns */
+
+.row:after {
+    clear: both;
+	content: "";
+	display: table;
+}
+
+.footer {
+    background: #b8bc86;
+	margin-top: 20px;
+	padding: 20px;
+	text-align: center;
+}
+
+@media screen and (max-width: 750px) {
+	.leftcolumn,
+	.middlecolumn,
+	.rightcolumn {
+		width: 90%;
+		padding: 20;
+	}
 }
