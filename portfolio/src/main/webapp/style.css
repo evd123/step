@@ -31,8 +31,9 @@ a {
 h {
     align-content: center;
     color: whitesmoke;
-    font-size: 60px;
+    font-size: 70px;
     font-weight: bold;
+    margin: 0px;
     text-align: center;
 }
 
@@ -53,7 +54,8 @@ h2 {
 
 h3 {
     color: whitesmoke;
-    font-size: 30px;
+    font-size: 40px;
+    margin: 0px;
 }
 
 p {
@@ -63,8 +65,8 @@ p {
 
 .footer {
     background: #192841;
-	margin-top: 20px;
-    padding: 30px;
+	margin-top: 50px;
+    padding: 40px;
 	text-align: center;
 }
 
@@ -73,21 +75,71 @@ input[type=submit] {
   border: none;
   border-radius: 10px;
   color: whitesmoke;
+  cursor: pointer;
   font-size: 14px;
   font-weight: bold;
   padding: 10px 15px;
   text-decoration: none;
-  cursor: pointer;
 }
 
 input[type=checkbox] {
     color:#192841;
 }
 
+
 textarea {
     vertical-align: middle;
 }
 
+button {
+    background-color: #192841;
+    border: none;
+    border-radius: 10px;
+    color: whitesmoke;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 10px;
+    padding: 10px 15px;
+    text-decoration: none;
+}
+
+button1 {
+    background-color: #192841;
+    border: none;
+    border-radius: 10px;
+    color: whitesmoke;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: bold;
+    margin: 10px;
+    padding: 5px 5px;
+    text-decoration: none;
+}
+
+select {
+    background-color: white;
+    border: none;
+    border-radius: 10px;
+    color: #192841;
+    font-size: 13px;
+    padding: 5px 5px;
+}
+
 #chart-container {
     align-content: center;
+}
+
+img {
+    align-content: center;
+    display: inline;
+}
+
+u1 {
+    list-style-type: none;
+    margin-top: 0px;
+}
+
+li {
+    margin: 10px;
 }

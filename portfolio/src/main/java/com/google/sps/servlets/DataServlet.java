@@ -11,7 +11,6 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
 package com.google.sps.servlets;
 
 import com.google.appengine.api.datastore.DatastoreService;
@@ -31,77 +30,75 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.google.sps.data.Message;
 
-/** Servlet that returns some example content. TODO: modify this file to handle comments data */
+/** Servlet that returns comments */
 @WebServlet("/data")
 public final class DataServlet extends HttpServlet {
 
-    @Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        Query query = new Query("Message").addSort("timestamp", SortDirection.DESCENDING);
+  @Override
+  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    Query query = new Query("Message").addSort("timestamp", SortDirection.DESCENDING);
 
-        DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-        PreparedQuery results = datastore.prepare(query);
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    PreparedQuery results = datastore.prepare(query);
 
-        List<Message> allMessages = new ArrayList<>();
-        for (Entity entity: results.asIterable()) {
-            long id = entity.getKey().getId();
-            String comment = (String) entity.getProperty("comment");
-            Boolean yes = (Boolean) entity.getProperty("need response");
-            String email = (String) entity.getProperty("email");
-            long timestamp = (long) entity.getProperty("timestamp");
+    List < Message > allMessages = new ArrayList < > ();
+    for (Entity entity: results.asIterable()) {
+      long id = entity.getKey().getId();
+      String comment = (String) entity.getProperty("comment");
+      Boolean yes = (Boolean) entity.getProperty("need response");
+      String email = (String) entity.getProperty("email");
+      long timestamp = (long) entity.getProperty("timestamp");
 
-            Message curMessage = new Message(id, comment, yes, email, timestamp);
-            allMessages.add(curMessage);
-        }
-        // Send the JSON as the response
-        response.setContentType("application/json");
-        Gson gson = new Gson();
-        String json = gson.toJson(allMessages);
-        response.getWriter().println(json);
+      Message curMessage = new Message(id, comment, yes, email, timestamp);
+      allMessages.add(curMessage);
+    }
+    // Send the JSON as the response
+    response.setContentType("application/json");
+    Gson gson = new Gson();
+    response.getWriter().println(gson.toJson(allMessages));
+  }
+
+  @Override
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    // Get the input from the form.
+    String msg = request.getParameter("text-input");
+    Boolean yes = getYes(request);
+    String email = request.getParameter("email-input");
+    // Record time submitted.
+    long timestamp = System.currentTimeMillis();
+
+    response.setContentType("text/html");
+    response.getWriter().println("Thanks for reaching out!");
+
+    if (yes) {
+      response.setContentType("text/html");
+      response.getWriter().println("I'll be in touch soon!");
     }
 
-    @Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        // Get the input from the form.
-        String msg = request.getParameter("text-input");
-        Boolean yes = getYes(request);
-        String email = request.getParameter("email-input");
-        // Record time submitted.
-        long timestamp = System.currentTimeMillis();
+    // creates Entity for messages
+    Entity messageEntity = new Entity("Message");
+    messageEntity.setProperty("comment", msg);
+    messageEntity.setProperty("need response", yes);
+    messageEntity.setProperty("email", email);
+    messageEntity.setProperty("timestamp", timestamp);
 
-        response.setContentType("text/html");
-        response.getWriter().println("Thanks for reaching out!");
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    datastore.put(messageEntity);
 
-        if (yes) {
-            response.setContentType("text/html");
-            response.getWriter().println("I'll be in touch soon!");
-        }
+    // Redirect back to the HTML page.
+    response.sendRedirect("/index.html");
+  }
 
-        // creates Entity for messages
-        Entity messageEntity = new Entity("Message");
-        messageEntity.setProperty("comment", msg);
-        messageEntity.setProperty("need response", yes);
-        messageEntity.setProperty("email", email);
-        messageEntity.setProperty("timestamp", timestamp);
-
-        DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-        datastore.put(messageEntity);
-
-        // Redirect back to the HTML page.
-        response.sendRedirect("/index.html");
+  /*
+  Function to check if email is submitted if the user wants a response. Don't think this function actually does anything.
+  */
+  private Boolean getYes(HttpServletRequest request) {
+    Boolean yes = Boolean.parseBoolean(request.getParameter("yes-response"));
+    String emailString = request.getParameter("email-input");
+    if (emailString == null) {
+      System.err.println("It looks like you're interested in a response! Please enter your email address so that I can get in touch.");
+      return false;
     }
-
-    /*
-    Function to check if email is submitted if the user wants a response. Don't think this function actually does anything.
-    */
-    private Boolean getYes(HttpServletRequest request) {
-        Boolean yes = Boolean.parseBoolean(request.getParameter("yes-response"));
-        String emailString = request.getParameter("email-input");
-        if (emailString == null) {
-            System.err.println("It looks like you're interested in a response! Please enter your email address so that I can get in touch.");
-            return false;
-        }
-        
-        return yes;
-    }
+    return yes;
+  }
 }

@@ -30,17 +30,31 @@
         <a href="https://github.com/evd123" target="_blank"><img src="images/github.png" width=100></a>
 
         <h2>Comment</h2>
-          <ul id="history"></ul>
-          <form action="/data" method="POST">
-           <p>Message: &nbsp<textarea name="text-input" placeholder="Message"></textarea></p>
-           <p><input type="checkbox" name="yes-response" value="true"> Check if you want a response (and make sure to fill in your email below)!</p>
-           <p>Email: &nbsp<input type="email" name="email-input" placeholder="me@example.com"></input></p>
+          <u1 id="history"></u1>
+          <form action="/data" method="POST" style="margin-top:40px">
+           <p1>Message: &nbsp<textarea name="text-input" placeholder="Hey there!"></textarea></p1></br></br>
+           <p1><input type="checkbox" name="yes-response" value="true"> Check if you want a response (and make sure to fill in your email below!)</p1></br></br>
+           <p1>Email: &nbsp<input type="email" name="email-input" placeholder="you@example.com"></input></p1></br></br>
            <input type="submit"/>
           </form>
         </div>
 
-        <h2>Graph</h2>
+        <h2>Where to next?</h2>
         <div id="chart-container" align="middle"></div>
+        </br>
+        <form action="/travel-data" method="POST" align="middle">
+        <select name="continent">
+            <option value="Africa">Africa</option>
+            <option value="Antartica">Antartica</option>
+            <option value="Asia">Asia</option>
+            <option value="Australia">Australia</option>
+            <option value="Europe">Europe</option>
+            <option value="North America">North America</option>
+            <option value="South America">South America</option>
+        </select>
+        </br></br>
+        <button>Let's Go!</button>
+        </form>
       </div>
       <div class="footer">
       </div>
