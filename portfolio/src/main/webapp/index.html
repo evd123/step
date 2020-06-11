@@ -1,18 +1,62 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>My Portfolio</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
-  </head>
-  <body>
-    <div id="content">
-      <h1>My Portfolio</h1>
-      <p>This is my portfolio.</p>
-      <p>Click here to get a random message:</p>
-      <button onclick="addRandomGreeting()">Hello</button>
-      <div id="greeting-container"></div>
-    </div>
-  </body>
+   <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta charset="UTF-8">
+      <title>Emma's Portfolio</title>
+      <link rel="stylesheet" href="style.css">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source Sans Pro">
+      <script src="https://www.gstatic.com/charts/loader.js"></script>
+      <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBcmH-zM_eWqi8tVB4CaVHNGERZvWeS6hU">
+      </script>
+      <script src="script.js"></script>
+      
+   </head>
+
+   <body onload="initialize();">
+      <div class="header">
+         <h>Emma</h>
+         <h3>Dunn</h3>
+      </div>
+
+      <div id="map"></div>
+
+      <div style="text-align:center">
+        <h2>Connect</h2>
+        <a href="mailto:evd1@rice.edu?subject=Subject"><img src="images/envelope.png" width=100></a>
+        <a href="https://www.linkedin.com/in/emmavdunn" target="_blank"><img src="images/linkedin.png" width=100></a>
+        <a href="https://hack.rice.edu" target="_blank"><img src="images/HackRiceLogo_Black_White (1).jpg" width=100></a>
+        <a href="https://github.com/evd123" target="_blank"><img src="images/github.png" width=100></a>
+
+        <h2>Comment</h2>
+          <u1 id="history"></u1>
+          <form action="/data" method="POST" style="margin-top:40px">
+           <p1>Message: &nbsp<textarea name="text-input" placeholder="Hey there!"></textarea></p1></br></br>
+           <p1><input type="checkbox" name="yes-response" value="true"> Check if you want a response (and make sure to fill in your email below!)</p1></br></br>
+           <p1>Email: &nbsp<input type="email" name="email-input" placeholder="you@example.com"></input></p1></br></br>
+           <input type="submit"/>
+          </form>
+        </div>
+
+        <h2>Where to next?</h2>
+        <div id="chart-container" align="middle"></div>
+        </br>
+        <form action="/travel-data" method="POST" align="middle">
+        <select name="continent">
+            <option value="Africa">Africa</option>
+            <option value="Antartica">Antartica</option>
+            <option value="Asia">Asia</option>
+            <option value="Australia">Australia</option>
+            <option value="Europe">Europe</option>
+            <option value="North America">North America</option>
+            <option value="South America">South America</option>
+        </select>
+        </br></br>
+        <button>Let's Go!</button>
+        </form>
+      </div>
+      <div class="footer">
+      </div>
+   </body>
 </html>
