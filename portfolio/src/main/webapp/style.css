@@ -2,6 +2,7 @@
 	box-sizing: border-box;
 }
 
+<<<<<<< HEAD
 #map {
     height: 100%;
 }
@@ -14,16 +15,25 @@ html, body {
 
 body {
     background: whitesmoke;
+=======
+body {
+    background: white;
+>>>>>>> a78d3eb7fa6469b91e5678e376eecf4af04e8840
 	font-family: "Source Sans Pro";
 	padding: 10px;
 }
 
 .header {
+<<<<<<< HEAD
     background: #192841;
+=======
+    background: #b8bc86;
+>>>>>>> a78d3eb7fa6469b91e5678e376eecf4af04e8840
 	padding: 30px;
 	text-align: center;
 }
 
+<<<<<<< HEAD
 a {
     padding: 15px;
 }
@@ -42,10 +52,16 @@ h1 {
     color: #192841;
     font-size: 20px;
     font-weight: bold;
+=======
+h1 {
+	color: whitesmoke;
+    padding: 20px;
+>>>>>>> a78d3eb7fa6469b91e5678e376eecf4af04e8840
 	text-align: center;
 }
 
 h2 {
+<<<<<<< HEAD
     align-content: center;
     color: #192841;
     font-size: 30px;
@@ -142,4 +158,73 @@ u1 {
 
 li {
     margin: 10px;
+=======
+	text-align: center;
+}
+
+
+/* Left and right column */
+
+.leftcolumn {
+	float: left;
+	padding: 10px;
+	padding-top: 40px;
+    width: 25%;
+}
+
+.rightcolumn {
+	float: left;
+	padding: 10px;
+	padding-top: 40px;
+    width: 25%;
+}
+
+
+/* Middle column */
+
+.middlecolumn {
+    align-content: center;
+	float: left;
+	width: 50%;
+}
+
+.card {
+	background-color: #b8bc86;
+	color: whitesmoke;
+    margin-top: 15px;
+	padding: 20px;
+}
+
+p {
+	padding-left: 10px;
+}
+
+a {
+	padding: 15px;
+}
+
+
+/* Clear floats after the columns */
+
+.row:after {
+    clear: both;
+	content: "";
+	display: table;
+}
+
+.footer {
+    background: #b8bc86;
+	margin-top: 20px;
+	padding: 20px;
+	text-align: center;
+}
+
+@media screen and (max-width: 750px) {
+	.leftcolumn,
+	.middlecolumn,
+	.rightcolumn {
+		width: 90%;
+		padding: 20;
+	}
+>>>>>>> a78d3eb7fa6469b91e5678e376eecf4af04e8840
 }
