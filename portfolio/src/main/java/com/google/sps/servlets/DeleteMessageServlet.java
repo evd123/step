@@ -11,10 +11,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-<<<<<<< HEAD
 
-=======
->>>>>>> a78d3eb7fa6469b91e5678e376eecf4af04e8840
 package com.google.sps.servlets;
 
 import com.google.appengine.api.datastore.DatastoreService;
@@ -31,7 +28,6 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/delete-message")
 public class DeleteMessageServlet extends HttpServlet {
 
-<<<<<<< HEAD
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         long id = Long.parseLong(request.getParameter("id"));
@@ -40,14 +36,4 @@ public class DeleteMessageServlet extends HttpServlet {
         DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
         datastore.delete(messageEntityKey);
     }
-=======
-  @Override
-  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    long id = Long.parseLong(request.getParameter("id"));
-
-    Key messageEntityKey = KeyFactory.createKey("Message", id);
-    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-    datastore.delete(messageEntityKey);
-  }
->>>>>>> a78d3eb7fa6469b91e5678e376eecf4af04e8840
 }
