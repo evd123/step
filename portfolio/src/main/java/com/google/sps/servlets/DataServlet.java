@@ -41,7 +41,7 @@ public final class DataServlet extends HttpServlet {
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
 
-    List < Message > allMessages = new ArrayList < > ();
+    List<Message> allMessages = new ArrayList<>();
     for (Entity entity: results.asIterable()) {
       long id = entity.getKey().getId();
       String comment = (String) entity.getProperty("comment");
