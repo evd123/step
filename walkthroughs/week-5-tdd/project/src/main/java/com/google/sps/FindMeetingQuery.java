@@ -19,14 +19,16 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
 
 public final class FindMeetingQuery {
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
-    // No attendees
     List<TimeRange> times = new ArrayList<>();
-    if (request.getDuration() <= TimeRange.START_OF_DAY - TimeRange.END_OF_DAY) {
+    List<TimeRange> newTimes = new ArrayList<>();
+    if (request.getDuration() <= TimeRange.END_OF_DAY - TimeRange.START_OF_DAY) {
         times.add(TimeRange.WHOLE_DAY);
+        newTimes.add(TimeRange.WHOLE_DAY);
         for (String person : request.getAttendees()) {
             for (Event mtg : events) {
                 Set<String> curAttending = mtg.getAttendees();
@@ -34,26 +36,55 @@ public final class FindMeetingQuery {
                 if (curAttending.contains(person)) {
                     for (TimeRange time : times) {
                         if (time.contains(curWhen)) {
-                            times.remove(time);
-                            times.add(TimeRange.fromStartEnd(time.start(), curWhen.start(), true));
-                            times.add(TimeRange.fromStartEnd(curWhen.end(), time.end(), true));
+                            newTimes.remove(time);
+                            newTimes.add(TimeRange.fromStartEnd(time.start(), curWhen.start(), false));
+                            newTimes.add(TimeRange.fromStartEnd(curWhen.end(), time.end(), false));
                         } else if (time.overlaps(curWhen)) {
                             if (time.contains(curWhen.start())) {
-                                times.remove(time);
-                                times.add(TimeRange.fromStartEnd(time.start(), curWhen.start(), true));
+                                newTimes.remove(time);
+                                newTimes.add(TimeRange.fromStartEnd(time.start(), curWhen.start(), false));
                             } else if (curWhen.contains(time.start())) {
-                                times.remove(time);
-                                times.add(TimeRange.fromStartEnd(curWhen.end(), time.end(), false));
+                                newTimes.remove(time);
+                                newTimes.add(TimeRange.fromStartEnd(curWhen.end(), time.end(), false));
                             }
                         }
                         if (curWhen.contains(time)) {
-                            times.remove(time);
+                            newTimes.remove(time);
                         }
                     }
                 } 
             }
         }  
     }
-    return times;
+    Set<TimeRange> finalTimes = new HashSet<>();
+    finalTimes.addAll(newTimes);
+    for (TimeRange time : newTimes) {
+        if (time.duration() == 0) {
+            finalTimes.remove(time);
+        }
+    }
+    return finalTimes;
+  }
+
+  public helper(List<TimeRange> times, TimeRange curWhen) {
+      List<TimeRange> temp = times;
+      for (TimeRange time: times) {
+          if (time.contains(curWhen)) {
+              newTimes.remove(time);
+              newTimes.add(TimeRange.fromStartEnd(time.start(), curWhen.start(), false));
+              newTimes.add(TimeRange.fromStartEnd(curWhen.end(), time.end(), false));
+          } else if (time.overlaps(curWhen)) {
+              if (time.contains(curWhen.start())) {
+                  newTimes.remove(time);
+                  newTimes.add(TimeRange.fromStartEnd(time.start(), curWhen.start(), false));
+              } else if (curWhen.contains(time.start())) {
+                  newTimes.remove(time);
+                  newTimes.add(TimeRange.fromStartEnd(curWhen.end(), time.end(), false));
+              }
+          }
+          if (curWhen.contains(time)) {
+              newTimes.remove(time);
+          }
+      }
   }
 }
