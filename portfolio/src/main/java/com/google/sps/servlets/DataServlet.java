@@ -30,7 +30,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.google.sps.data.Message;
 
-/** Servlet that returns some example content. TODO: modify this file to handle comments data */
+/** Servlet that returns comments */
 @WebServlet("/data")
 public final class DataServlet extends HttpServlet {
 
@@ -45,7 +45,7 @@ public final class DataServlet extends HttpServlet {
     for (Entity entity: results.asIterable()) {
       long id = entity.getKey().getId();
       String comment = (String) entity.getProperty("comment");
-      String yes = (String) entity.getProperty("need response");
+      Boolean yes = (Boolean) entity.getProperty("need response");
       String email = (String) entity.getProperty("email");
       long timestamp = (long) entity.getProperty("timestamp");
 
@@ -55,23 +55,22 @@ public final class DataServlet extends HttpServlet {
     // Send the JSON as the response
     response.setContentType("application/json");
     Gson gson = new Gson();
-    String json = gson.toJson(allMessages);
+    response.getWriter().println(gson.toJson(allMessages));
   }
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     // Get the input from the form.
     String msg = request.getParameter("text-input");
-    String yes = getYes(request);
+    Boolean yes = getYes(request);
     String email = request.getParameter("email-input");
     // Record time submitted.
     long timestamp = System.currentTimeMillis();
 
-    // Intended to send user a message; don't think this actually does anything though
     response.setContentType("text/html");
     response.getWriter().println("Thanks for reaching out!");
 
-    if (yes == "true") {
+    if (yes) {
       response.setContentType("text/html");
       response.getWriter().println("I'll be in touch soon!");
     }
@@ -93,14 +92,13 @@ public final class DataServlet extends HttpServlet {
   /*
   Function to check if email is submitted if the user wants a response. Don't think this function actually does anything.
   */
-  private String getYes(HttpServletRequest request) {
-    String yes = request.getParameter("yes-response");
+  private Boolean getYes(HttpServletRequest request) {
+    Boolean yes = Boolean.parseBoolean(request.getParameter("yes-response"));
     String emailString = request.getParameter("email-input");
     if (emailString == null) {
       System.err.println("It looks like you're interested in a response! Please enter your email address so that I can get in touch.");
-      return "false";
+      return false;
     }
-
     return yes;
   }
 }
