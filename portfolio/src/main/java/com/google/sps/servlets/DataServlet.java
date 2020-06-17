@@ -40,8 +40,7 @@ public final class DataServlet extends HttpServlet {
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
-
-    List < Message > allMessages = new ArrayList < > ();
+    List<Message> allMessages = new ArrayList<>();
     for (Entity entity: results.asIterable()) {
       long id = entity.getKey().getId();
       String comment = (String) entity.getProperty("comment");
@@ -55,14 +54,14 @@ public final class DataServlet extends HttpServlet {
     // Send the JSON as the response
     response.setContentType("application/json");
     Gson gson = new Gson();
-    response.getWriter().println(gson.toJson(allMessages));
+    gson.toJson(gson.toJsonTree(allMessages), gson.newJsonWriter(response.getWriter()));
   }
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     // Get the input from the form.
     String msg = request.getParameter("text-input");
-    Boolean yes = getYes(request);
+    Boolean yes = Boolean.parseBoolean(request.getParameter("yes-response"));
     String email = request.getParameter("email-input");
     // Record time submitted.
     long timestamp = System.currentTimeMillis();
@@ -87,18 +86,5 @@ public final class DataServlet extends HttpServlet {
 
     // Redirect back to the HTML page.
     response.sendRedirect("/index.html");
-  }
-
-  /*
-  Function to check if email is submitted if the user wants a response. Don't think this function actually does anything.
-  */
-  private Boolean getYes(HttpServletRequest request) {
-    Boolean yes = Boolean.parseBoolean(request.getParameter("yes-response"));
-    String emailString = request.getParameter("email-input");
-    if (emailString == null) {
-      System.err.println("It looks like you're interested in a response! Please enter your email address so that I can get in touch.");
-      return false;
-    }
-    return yes;
   }
 }
