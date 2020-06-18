@@ -83,6 +83,24 @@ public final class FindMeetingQuery {
             }
         }
     }
+
+    Set<TimeRange> optTimes = new ArrayList<>();
+    // iterate through the optional attendees
+    for (String opt : request.getOptionalAttendees()) {
+        // iterate through the events of the day
+        for (Event meet : events) {
+            // check if the optional attendees is attending this (required) meeting
+            if (meet.getAttendees().contains(opt)) {
+                List<TimeRange> tempTimes = new ArrayList<>();
+                tempTimes.addAll(optTimes); 
+                for (TimeRange confirmed : finalTimes) {
+                    if (confirmed.contains(meet.getWhen())) {
+                        
+                    }
+                }
+            }
+        }
+    }
     return finalTimes;
   }
 }
