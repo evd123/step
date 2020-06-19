@@ -25,11 +25,43 @@ import java.util.Set;
 public final class FindMeetingQuery {
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
     Set<TimeRange> newTimes = new HashSet<>();
+    Set<TimeRange> optTimes = new HashSet<>();
     if (request.getDuration() <= TimeRange.END_OF_DAY - TimeRange.START_OF_DAY) {
         // before checking the event availability, the entire day is available
         newTimes.add(TimeRange.WHOLE_DAY);
-        // iterate through the people in the message request
-        for (String person : request.getAttendees()) {
+        optTimes.add(TimeRange.WHOLE_DAY);
+        // return timeslots required attendees are available for
+        newTimes = helper(events, request, request.getAttendees(), newTimes);
+        // return timeslots optional attendees are available for
+        optTimes = helper(events, request, request.getOptionalAttendees(), optTimes);
+    }
+    // sort and filter times that required attendees are available for
+    List<TimeRange> finalTimes = new ArrayList<>();
+    finalTimes = sorter(finalTimes, request, newTimes);
+    // sort and filter times that optional attendees are available for
+    List<TimeRange> finalOptTimes = new ArrayList<>();
+    finalOptTimes = sorter(finalOptTimes, request, optTimes);
+
+    // check to see if the lists need to be compared; if there are no optional attendees, can
+    // return times that work for required attendees, and vice versa
+    if (request.getAttendees().size() == 0) {
+        return finalOptTimes;
+    } else if (request.getOptionalAttendees().size() == 0) {
+        return finalTimes;
+    }
+
+    // iterate through the optional attendees
+    List<TimeRange> possibleFinalTimes = new ArrayList<>();
+    possibleFinalTimes = comparer(finalOptTimes, finalTimes, request);
+
+    if (possibleFinalTimes.size() != 0) {
+        return possibleFinalTimes;
+    }
+    return finalTimes;
+  }
+
+  public Set<TimeRange> helper(Collection<Event> events, MeetingRequest request, Collection<String> attendees, Set<TimeRange> newTimes) {
+    for (String person : attendees) {
             // iterate through the events already scheduled for that day
             for (Event mtg : events) {
                 Set<String> curAttending = mtg.getAttendees();
@@ -58,10 +90,12 @@ public final class FindMeetingQuery {
                     }
                 } 
             }
-        }  
-    }
-    List<TimeRange> finalTimes = new ArrayList<>();
-    for (TimeRange time : newTimes) {
+        }
+        return newTimes;
+  }
+
+  public List<TimeRange> sorter(List<TimeRange> finalTimes, MeetingRequest request, Set<TimeRange> semiFilteredTimes) {
+    for (TimeRange time : semiFilteredTimes) {
         if (time.duration() != 0 && request.getDuration() <= time.duration()) {
             if (finalTimes.size() == 0) {
                 finalTimes.add(time);
@@ -83,25 +117,35 @@ public final class FindMeetingQuery {
             }
         }
     }
-
-    Set<TimeRange> optTimes = new ArrayList<>();
-    // iterate through the optional attendees
-    for (String opt : request.getOptionalAttendees()) {
-        // iterate through the events of the day
-        for (Event meet : events) {
-            // check if the optional attendees is attending this (required) meeting
-            if (meet.getAttendees().contains(opt)) {
-                List<TimeRange> tempTimes = new ArrayList<>();
-                tempTimes.addAll(optTimes); 
-                for (TimeRange confirmed : finalTimes) {
-                    if (confirmed.contains(meet.getWhen())) {
-                        
-                    }
-                }
-            }
-        }
-    }
     return finalTimes;
+  }
+
+  public List<TimeRange> comparer(List<TimeRange> optTimes, List<TimeRange> newTimes, MeetingRequest request) {
+      Set<TimeRange> tempTimes = new HashSet<>();
+      for (TimeRange time1 : optTimes) {
+          for (TimeRange time2 : newTimes) {
+              if (time2.contains(time1)) {
+                  tempTimes.add(time1);
+              } else if (time1.contains(time2)) {
+                  tempTimes.add(time2);
+              } else if (time2.overlaps(time1)) {
+                if (time1.contains(time2.start())) {
+                    TimeRange tempTime = TimeRange.fromStartEnd(time2.start(), time1.end(), false);
+                    if (tempTime.duration() >= request.getDuration()) {
+                        tempTimes.add(tempTime);
+                    }   
+                } else if (time2.contains(time1.start())) {
+                    TimeRange tempTime = TimeRange.fromStartEnd(time1.start(), time2.end(), false);
+                    if (tempTime.duration() >= request.getDuration()) {
+                        tempTimes.add(tempTime);
+                    }
+                } 
+              }
+          }
+      }
+      List<TimeRange> compared = new ArrayList<>();
+      compared = sorter(compared, request, tempTimes);
+      return compared;
   }
 }
 
