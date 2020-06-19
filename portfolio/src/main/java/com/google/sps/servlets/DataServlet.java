@@ -5,7 +5,7 @@
 // You may obtain a copy of the License at
 //
 //     https://www.apache.org/licenses/LICENSE-2.0
-//
+//git 
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -55,14 +55,14 @@ public final class DataServlet extends HttpServlet {
     // Send the JSON as the response
     response.setContentType("application/json");
     Gson gson = new Gson();
-    response.getWriter().println(gson.toJson(allMessages));
+    gson.toJson(gson.toJsonTree(allMessages), gson.newJsonWriter(response.getWriter()));
   }
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     // Get the input from the form.
     String msg = request.getParameter("text-input");
-    Boolean yes = getYes(request);
+    Boolean yes = Boolean.parseBoolean(request.getParameter("yes-response"));
     String email = request.getParameter("email-input");
     // Record time submitted.
     long timestamp = System.currentTimeMillis();
@@ -87,18 +87,5 @@ public final class DataServlet extends HttpServlet {
 
     // Redirect back to the HTML page.
     response.sendRedirect("/index.html");
-  }
-
-  /*
-  Function to check if email is submitted if the user wants a response. Don't think this function actually does anything.
-  */
-  private Boolean getYes(HttpServletRequest request) {
-    Boolean yes = Boolean.parseBoolean(request.getParameter("yes-response"));
-    String emailString = request.getParameter("email-input");
-    if (emailString == null) {
-      System.err.println("It looks like you're interested in a response! Please enter your email address so that I can get in touch.");
-      return false;
-    }
-    return yes;
   }
 }

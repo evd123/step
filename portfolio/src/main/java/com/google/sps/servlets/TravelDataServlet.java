@@ -25,8 +25,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -52,7 +50,7 @@ public class TravelDataServlet extends HttpServlet {
     
     response.setContentType("application/json");
     Gson gson = new Gson();
-    response.getWriter().println(gson.toJson(voteCount));
+    gson.toJson(gson.toJsonTree(voteCount), gson.newJsonWriter(response.getWriter()));
   }
 
   @Override

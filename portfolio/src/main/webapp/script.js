@@ -53,12 +53,6 @@ function getComments() {
   });
 }
 
-function createListElement(text) {
-  const liElement = document.createElement('li');
-  liElement.innerText = text;
-  return liElement;
-}
-
 /** Creates an element that represents a task, including its delete button. */
 function createMessageElement(message) {
   const messageElement = document.createElement('li');
