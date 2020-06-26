@@ -24,8 +24,8 @@ import java.util.Set;
 
 public final class FindMeetingQuery {
     public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
-        Set<TimeRange> requiredTimes = new HashSet<>();
-        Set<TimeRange> optionalTimes = new HashSet<>();
+        List<TimeRange> requiredTimes = new ArrayList<>();
+        List<TimeRange> optionalTimes = new ArrayList<>();
         if (request.getDuration() <= TimeRange.END_OF_DAY - TimeRange.START_OF_DAY) {
             // before checking the event availability, the entire day is available
             // return timeslots required attendees are available for
@@ -33,34 +33,25 @@ public final class FindMeetingQuery {
             // return timeslots optional attendees are available for
             optionalTimes = determineAvailableTimes(events, request, request.getOptionalAttendees());
         }
-        // sort times that required attendees are available for
-        List<TimeRange> finalRequiredTimes = new ArrayList<>();
-        finalRequiredTimes.addAll(requiredTimes);
-        Collections.sort(finalRequiredTimes, TimeRange.ORDER_BY_START);
-        // sort times that optional attendees are available for
-        List<TimeRange> finalOptionalTimes = new ArrayList<>();
-        finalOptionalTimes.addAll(optionalTimes);
-        Collections.sort(finalOptionalTimes, TimeRange.ORDER_BY_START);
-
+        
         // check to see if the lists need to be compared; if there are no attendees at all, the entire 
         // day is available. Otherwise, if there are no optional attendees, we can
         // return times that work for required attendees, and vice versa.
         if (request.getAttendees().size() == 0 && request.getOptionalAttendees().size() == 0) {
             return Arrays.asList(TimeRange.WHOLE_DAY);
         } else if (request.getAttendees().size() == 0) {
-            return finalOptionalTimes;
+            return optionalTimes;
         } else if (request.getOptionalAttendees().size() == 0) {
-            return finalRequiredTimes;
+            return requiredTimes;
         }
 
-        // iterate through the optional attendees
-        List<TimeRange> possibleFinalTimes = new ArrayList<>();
-        possibleFinalTimes = crossCheck(finalOptionalTimes, finalRequiredTimes, request);
+        // implement the crossCheck helper (to see which times work for both lists)
+        List<TimeRange> possibleFinalTimes = crossCheck(optionalTimes, requiredTimes, request);
 
         if (possibleFinalTimes.size() != 0) {
             return possibleFinalTimes;
         }
-        return finalRequiredTimes;
+        return requiredTimes;
     }
 
     /**
@@ -68,8 +59,9 @@ public final class FindMeetingQuery {
     * happening, a request, a list of attendees (comes from the request, but is inputted separately 
     * to allow functionality for both required and optional attendees
     */
-    public Set<TimeRange> determineAvailableTimes(Collection<Event> events, MeetingRequest request, Collection<String> attendees) {
+    public List<TimeRange> determineAvailableTimes(Collection<Event> events, MeetingRequest request, Collection<String> attendees) {
         Set<TimeRange> availableTimes = new HashSet<>();
+        // at the beginning, the entire day is available
         availableTimes.add(TimeRange.WHOLE_DAY);
         for (String person : attendees) {
             // iterate through the events already scheduled for that day
@@ -77,9 +69,11 @@ public final class FindMeetingQuery {
                 Set<String> curAttending = mtg.getAttendees();
                 TimeRange curWhen = mtg.getWhen();
                 if (curAttending.contains(person)) {
+                    // create a temporary list of times to iterate through; this is a copy of the list that
+                    // gets narrowed down each time. a copy must be made each time because otherwise the list
+                    // gets mutated while being iterated through.
                     List<TimeRange> times = new ArrayList<>();
                     times.addAll(availableTimes);
-                    // iterate through the available times
                     for (TimeRange time : times) {
                         if (time.contains(curWhen)) {
                             availableTimes.remove(time);
@@ -113,7 +107,10 @@ public final class FindMeetingQuery {
                 }
             }
         }
-        return availableTimes;
+        List<TimeRange> finalTimes = new ArrayList<>();
+        finalTimes.addAll(availableTimes);
+        Collections.sort(finalTimes, TimeRange.ORDER_BY_START);
+        return finalTimes;
     }
 
     /**
@@ -121,8 +118,8 @@ public final class FindMeetingQuery {
     */
     public List<TimeRange> crossCheck(List<TimeRange> optionalTimes, List<TimeRange> requiredTimes, MeetingRequest request) {
         Set<TimeRange> tempTimes = new HashSet<>();
-        for (TimeRange optTime : optionalTimes) {
-            for (TimeRange reqTime : requiredTimes) {
+        for (TimeRange reqTime : requiredTimes) {
+            for (TimeRange optTime : optionalTimes) {
                 if (reqTime.contains(optTime)) {
                     tempTimes.add(optTime);
                 } else if (optTime.contains(reqTime)) {
@@ -139,11 +136,12 @@ public final class FindMeetingQuery {
                             tempTimes.add(tempTime);
                         }
                     }
-                }
+                } 
             }
         }
         List<TimeRange> compared = new ArrayList<>();
         compared.addAll(tempTimes);
+        Collections.sort(compared, TimeRange.ORDER_BY_START);
         return compared;
     }
 }
