@@ -92,7 +92,7 @@ function getMap() {
         lat: 39.8283,
         lng: -99.5
       },
-      zoom: 5.5
+      zoom: 5
     });
 
   // Travel/NSLI-Y marker
